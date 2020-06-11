@@ -4,7 +4,7 @@
  * @Author: sueRimn
  * @Date: 2020-06-08 10:35:56
  * @LastEditors: sueRimn
- * @LastEditTime: 2020-06-09 14:06:14
+ * @LastEditTime: 2020-06-11 11:50:16
  */
 
 
@@ -519,13 +519,13 @@ sam.move();
 // 2
 
 class Person {
-    #name:string;
-    private _age:number;
-    constructor(name:string){
+    #name: string;
+    private _age: number;
+    constructor(name: string) {
         this.#name = name;
     }
-    greet(){
-        console.log(`Hello,my name is ${this.#name}!` );
+    greet() {
+        console.log(`Hello,my name is ${this.#name}!`);
     }
 }
 
@@ -533,6 +533,123 @@ let semlinker = new Person("Semlinker");
 
 // semlinker.#name
 
+
+/*  
+*   TypeScript 泛型
+*
+*/
+
+// 1 泛型 接口
+
+interface GenericIdentityFn<T> {
+    (arg: T): T;
+}
+// 2 泛型类
+class GenericNumber<T> {
+    zeroValue: T;
+    add: (x: T, y: T) => T;
+}
+
+let myGenericNumber = new GenericNumber<number>();
+
+myGenericNumber.zeroValue = 0
+myGenericNumber.add = function (x, y) {
+    return x + y
+}
+// 3 泛型变量
+/*
+* T（Type）：表示一个 TypeScript 类型
+* K（Key）：表示对象中的键类型
+* V（Value）：表示对象中的值类型
+* E（Element）：表示元素类型
+*/
+
+// 4 泛型工具类型 Partial
+
+// 4-1 typeof
+interface Person4_1 {
+    name: string;
+    age: number;
+}
+
+const sem: Person4_1 = { name: 'semlinker', age: 30 };
+type sem = typeof sem;
+
+function toArray(x: number): Array<number> {
+    return [x]
+}
+
+type Func = typeof toArray;
+
+// 4_2 keyof 
+interface Person4_2 {
+    name: string;
+    age: number;
+}
+type K1 = keyof Person; // "name" | "age"
+type K2 = keyof Person[]; // "length" | "toString" | "pop" | "push" | "concat" | "join" 
+type K3 = keyof { [x: string]: Person };  // string | number
+
+// 4-3 in
+
+type Keys = 'a' | 'b' | 'c';
+
+type obj = {
+    [p in Keys]: any
+}
+
+// 4-4 infer
+type ReturnType<T> = T extends (
+    ...args: any[]
+) => infer R ? R : any;
+
+
+// 4-5 extends
+
+interface ILengthwise {
+    length: number;
+}
+
+function loggingIdentity<T extends ILengthwise>(arg: T): T {
+    console.log(arg.length);
+    return arg;
+}
+
+// loggingIdentity(3);
+loggingIdentity({ length: 10 });
+
+
+// Partial 4-6
+/*
+* node_modules/typescript/lib/lib.es5.d.ts
+* Make all properties in T optional
+*/
+type Partial<T> = {
+    [P in keyof T]?: T[P];
+};
+
+interface Todo {
+    title: string;
+    description: string;
+}
+
+function updateTodo(todo: Todo, fieldsToUpdate: Partial<Todo>) {
+    return { ...todo, ...fieldsToUpdate };
+}
+
+const todo1 = {
+    title: "organize desk",
+    description: "clear clutter",
+};
+
+const todo2 = updateTodo(todo1, {
+    description: "throw out trash",
+});
+
+// {
+//     title ?: string | undefined;
+//     description ?: string | undefined;
+// }
 
 
 export { }
