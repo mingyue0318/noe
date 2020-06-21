@@ -1,6 +1,6 @@
 {
   "name": "pangyaotool",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "前端工具方法",
   "main": "pangy_tool.js",
   "scripts": {
