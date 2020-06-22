@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "pangyaotool": "^1.0.0"
+    "pangyaotool": "^1.0.1"
   }
 }
