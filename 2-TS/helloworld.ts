@@ -4,7 +4,7 @@
  * @Author: sueRimn
  * @Date: 2020-06-08 10:35:56
  * @LastEditors: sueRimn
- * @LastEditTime: 2020-06-11 11:50:16
+ * @LastEditTime: 2020-06-12 10:33:29
  */
 
 
@@ -549,6 +549,7 @@ class GenericNumber<T> {
     zeroValue: T;
     add: (x: T, y: T) => T;
 }
+// https://www.foxithl.cn/wxapi/qr/?url=https://online-fz01.connectedpdf.com/wxlink/shf/f25cc700-151c-48a2-8f28-393e5e052928,1.0/wuxiaoyu/%E7%A6%8F%E6%98%95%E4%BA%92%E8%81%94%E8%AF%81%E4%B9%A6%E6%8A%A5%E5%91%8A%E5%8F%91%E5%B8%83%E5%B9%B3%E5%8F%B0%E7%AE%80%E4%BB%8B_20200122.cpdf
 
 let myGenericNumber = new GenericNumber<number>();
 
