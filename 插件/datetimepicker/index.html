@@ -1,0 +1,37 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: sueRimn
+ * @Date: 2020-08-17 13:44:49
+ * @LastEditors: sueRimn
+ * @LastEditTime: 2020-08-18 10:52:33
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./static/datetimepicker.css">
+</head>
+<body>
+    <input type="text" value="" id="datetimepicker_mask" />
+    <script src="./static/jquery.js"></script>
+    <script src="./static/datetimepicker.js"></script>
+    <script>
+        const now = new Date()
+        $('#datetimepicker_mask').datetimepicker({
+            format: 'yyyy-mm-dd HH:mm:ss',
+            format: 'yyyy-mm-dd hh:mm:ss',
+            format: 'y-m-d H:m:s',
+            autoclose: true,
+            todayBtn: true,
+            minDate: new Date(),
+            //  forceParse: true,//当选择器关闭的时候，是否强制解析输入框中的值
+            // format: 'yyyy-mm-dd HH:mm:ss',
+        }).on("change",(event)=>{
+            console.log(event.target.value)
+        });
+    </script>
+</body>
+</html>
