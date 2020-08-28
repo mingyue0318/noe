@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" />
-    <a-button type="primary">Primary</a-button>
     <Button type="primary">Primary</Button>
     <HelloWorld msg="Welcome to Your Vue.js App" />
   </div>
@@ -11,6 +10,7 @@
 import HelloWorld from "./components/HelloWorld.vue";
 import { Button } from 'ant-design-vue';
 // import { Button } from "Antd"
+import api from './api'
 
 export default {
   name: "App",
@@ -18,6 +18,15 @@ export default {
     HelloWorld,
     Button
   },
+  methods:{
+      getDate(){
+          api.get('/api/wxapi')
+      },
+  },
+  mounted() {
+      this.getDate()
+  },
+
 };
 </script>
 
