@@ -1,22 +1,19 @@
-import _ from 'lodash';
-import './style.css';
-import Icon from './icon.jpeg';
-import Data from './data.xml';
-function component() {
-    var element = document.createElement('div');
+// import _ from 'lodash';
+// import printMe from './print.js';
+// import './styles.css';
+// if (process.env.NODE_ENV !== 'production') {
+//     console.log('Looks like we are in development mode!');
+// }
+function getComponent() {
 
-     // Lodash（目前通过一个 script 脚本引入）对于执行这一行是必需的
-    //  Lodash now imported by this script
-     element.innerHTML = _.join(['Hello','webpack'],' ');
-     element.classList.add('hello');
+    return import("loadsh").then(_=>{
+        var element = document.createElement('div');
 
-     var myIcon = new Image();
-     myIcon.src = Icon;
-
-     element.appendChild(myIcon);
-
-     console.log(Data);
-     return element
+        element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+        return element;
+    }).catch(error => 'An error occurred while loading the component');
 }
 
-document.body.appendChild(component());
+getComponent().then(component =>{
+    document.body.appendChild(component)
+})

@@ -1,0 +1,47 @@
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const webpack = require('webpack');
+
+module.exports = {
+    // 入口
+    entry: {
+        app: './src/index.js',
+        // print: './src/print.js',
+    },
+    // 开发模式中使用 错误定位在具体js中 而不是笼统的js中
+    devtool: 'inline-source-map',
+    // webpack-dev-server
+    devServer:{
+        contentBase: './dist',
+        hot:true
+    },
+    module:{
+        rules:[
+            {
+                test:/\.css$/,
+                use:[
+                    'style-loader',
+                    'css-loader'
+                ]
+            }
+        ]
+    },
+    // 插件
+    plugins: [
+        // 清理dist
+        new CleanWebpackPlugin(),
+        // 打包html 并不是太明白
+        new HtmlWebpackPlugin({
+            title: 'Output Management'
+        }),
+        new webpack.NamedModulesPlugin(),
+        new webpack.HotModuleReplacementPlugin()
+    ],
+    // 出口
+    output: {
+        filename: '[name].bundle.js',
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: '/'
+    }
+}

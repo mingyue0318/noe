@@ -1,43 +1,20 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: './src/index.js',
-    output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist')
+    // 入口
+    entry: {
+        index: './src/index.js',
     },
-    module: {
-        rules: [{
-                test: /\.css$/,
-                use: [
-                    'style-loader',
-                    'css-loader'
-                ]
-            },
-            {
-                test: /\.(png|svg|jpg|gif|jpeg)$/,
-                use: [
-                    'file-loader'
-                ]
-            },
-            {
-                test: /\.(woff|woff2|eot|ttf|otf)$/,
-                use: [
-                    'file-loader'
-                ]
-            },
-            {
-                test: /\.(csv|tsv)$/,
-                use: [
-                    'csv-loader'
-                ]
-            },
-            {
-                test: /\.xml$/,
-                use: [
-                    'xml-loader'
-                ]
-            }
-        ]
+    plugins: [
+        new HtmlWebpackPlugin({
+            title: 'Code Splitting'
+        })
+    ],
+    // 出口
+    output: {
+        filename: '[name].bundle.js',
+        chunkFilename:'[name].bundle.js',
+        path: path.resolve(__dirname, 'dist'),
     }
 }
