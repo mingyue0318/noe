@@ -1,19 +1,14 @@
-// import _ from 'lodash';
-// import printMe from './print.js';
-// import './styles.css';
-// if (process.env.NODE_ENV !== 'production') {
-//     console.log('Looks like we are in development mode!');
-// }
-function getComponent() {
+import _ from 'lodash';
+import Print from './print';
 
-    return import("loadsh").then(_=>{
-        var element = document.createElement('div');
+function component() {
+    var element = document.createElement('div');
 
-        element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-        return element;
-    }).catch(error => 'An error occurred while loading the component');
+    // lodash 是由当前 script 脚本 import 导入进来的
+    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+    element.onclick = Print.bind(null, 'Hello webpack!');
+
+    return element;
 }
 
-getComponent().then(component =>{
-    document.body.appendChild(component)
-})
+document.body.appendChild(component());
